@@ -47,4 +47,14 @@
         android:orientation="vertical" >
     </LinearLayout>
 
+    <org.rotiv.memolina.Carta
+        android:id="@+id/carta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tabuleiro"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="36dp" >
+    </org.rotiv.memolina.Carta>
+
 </RelativeLayout>
