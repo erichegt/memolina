@@ -4,38 +4,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <TableLayout
-        android:id="@+id/tabuleiro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center" >
+<!--     <TableLayout -->
+<!--         android:id="@+id/tabuleiro" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_centerVertical="true" -->
+<!--         android:gravity="center" > -->
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
+<!--         <TableRow -->
+<!--             android:id="@+id/tableRow1" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" > -->
+<!--         </TableRow> -->
 
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
+<!--         <TableRow -->
+<!--             android:id="@+id/tableRow2" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" > -->
+<!--         </TableRow> -->
 
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
+<!--         <TableRow -->
+<!--             android:id="@+id/tableRow3" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" > -->
+<!--         </TableRow> -->
 
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-    </TableLayout>
+<!--         <TableRow -->
+<!--             android:id="@+id/tableRow4" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" > -->
+<!--         </TableRow> -->
+<!--     </TableLayout> -->
 
     <LinearLayout
         android:id="@+id/tempo"
@@ -46,15 +46,5 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical" >
     </LinearLayout>
-
-    <org.rotiv.memolina.Carta
-        android:id="@+id/carta1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tabuleiro"
-        android:layout_marginLeft="46dp"
-        android:layout_marginTop="36dp" >
-    </org.rotiv.memolina.Carta>
 
 </RelativeLayout>
