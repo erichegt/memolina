@@ -1,23 +1,35 @@
 package org.rotiv.memolina;
 
+import org.rotiv.memolina.view.Tabuleiro;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow.LayoutParams;
 
 public class MemolinaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		RelativeLayout jogo = (RelativeLayout) findViewById(R.id.jogo);
+		LinearLayout tempo = (LinearLayout) findViewById(R.id.tempo);
 
-//		TableLayout tabuleiro = (TableLayout) findViewById(R.id.tabuleiro);
-		// tabuleiro.addView(new Carta(this).build(R.drawable.ic_card1, 1, 1));
+		Tabuleiro tabuleiro = new Tabuleiro(this);
+		tabuleiro.getTableLayout().setGravity(Gravity.CENTER);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		tabuleiro.getTableLayout().setLayoutParams(lp);
 		
-//		TableRow row1 = (TableRow) findViewById(R.id.tableRow1);
-		LinearLayout lin = (LinearLayout) findViewById(R.id.tempo);
-		lin.addView(new Carta(this));
-		
+		//Fase 1:
+		tabuleiro.setRows(4);
+		tabuleiro.setCols(4);
+		tabuleiro.setEqualCards(2);
+		tabuleiro.constroiTabuleiro();
+				
+		jogo.addView(tabuleiro.getTableLayout());
 	}
 
 	@Override

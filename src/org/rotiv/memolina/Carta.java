@@ -1,42 +1,43 @@
 package org.rotiv.memolina;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-public class Carta extends FrameLayout {
+public class Carta {
+	private FrameLayout frameLayout;
+	
 	private ImageView back;
 	private ImageView front;
 
 	private boolean isFirstImage = true;
 
-//	private boolean turned;
-//	private boolean enabledToPlay;				
-//	private int imageId;
-//	private int positionId;
-//	private int positionX;
+	private int padding = 2;
+	private boolean turned;
+	private boolean enabledToPlay;				
+	private int imageId;
+	private int positionId;
+	private int positionX;
+
+	private Context ctxt;
 	
-	public Carta(Context context) {
-		super(context);
-		back = new ImageView(context);
-		front = new ImageView(context);
-		
-		
-//	}
-//	
-//	public Carta build(int desenho, int imageId, int positionId) {
-		//PQP!!
-		
-//		back = (ImageView) findViewById(R.id.ImageView01);
-//		front = (ImageView) findViewById(R.id.ImageView02);
-		back.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_card_back));
-		front.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_card10));
+	public Carta(Context ctxt, int codFigura, int imageId, int positionId) {
+		this.ctxt = ctxt;
+		this.frameLayout = new FrameLayout(ctxt);
+		back = new ImageView(ctxt);
+		front = new ImageView(ctxt);
+		back.setImageDrawable(ctxt.getResources().getDrawable(R.drawable.ic_card_back));
+		front.setImageDrawable(getCardDrawable(codFigura));
 		front.setVisibility(View.GONE);
 		
-		addView(back);
-		addView(front);
+		//padding
+		back.setPadding(padding, padding, padding, padding);
+		
+		frameLayout.addView(back);
+		frameLayout.addView(front);
 
 		back.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -51,10 +52,8 @@ public class Carta extends FrameLayout {
 			}
 		});
 		
-//		this.imageId = imageId;
-//		this.positionId = positionId;
-		
-//		return new Carta(this.getContext());
+		this.imageId = imageId;
+		this.positionId = positionId;
 	}
 	
 	private void applyRotation(float start, float end) {
@@ -77,5 +76,19 @@ public class Carta extends FrameLayout {
 		} else {
 			front.startAnimation(rotation);
 		}
+	}
+	
+	private Drawable getCardDrawable(int codigo) {
+	    String uri = "drawable/ic_card"+codigo;
+
+	    // int imageResource = R.drawable.icon;
+	    int imageResource = ctxt.getResources().getIdentifier(uri, null, ctxt.getPackageName());
+	    Drawable image = ctxt.getResources().getDrawable(imageResource);
+	    
+	    return image;
+	}
+	
+	public FrameLayout getFrameLayout() {
+		return frameLayout;
 	}
 }
