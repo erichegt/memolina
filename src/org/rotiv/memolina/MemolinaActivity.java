@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TableRow.LayoutParams;
 
@@ -16,9 +18,10 @@ public class MemolinaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		RelativeLayout jogo = (RelativeLayout) findViewById(R.id.jogo);
-		LinearLayout tempo = (LinearLayout) findViewById(R.id.tempo);
+//		LinearLayout tempo = (LinearLayout) findViewById(R.id.tempo);
+		Button viraTudo = (Button) findViewById(R.id.botaoViraTudo);
 
-		Tabuleiro tabuleiro = new Tabuleiro(this);
+		final Tabuleiro tabuleiro = new Tabuleiro(this);
 		tabuleiro.getTableLayout().setGravity(Gravity.CENTER);
 		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		tabuleiro.getTableLayout().setLayoutParams(lp);
@@ -30,6 +33,16 @@ public class MemolinaActivity extends Activity {
 		tabuleiro.constroiTabuleiro();
 				
 		jogo.addView(tabuleiro.getTableLayout());
+		
+		viraTudo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for(int x=0; x < tabuleiro.getnCards(); x++) {
+					Carta c = (Carta) tabuleiro.getShuffledCards().get(x);
+					c.applyRotation(0, -90);
+				}
+			}
+		});
 	}
 
 	@Override

@@ -4,13 +4,18 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class Carta {
-	private FrameLayout frameLayout;
-	
 	private ImageView back;
+	public ImageView getBack() {
+		return back;
+	}
+
+	public ImageView getFront() {
+		return front;
+	}
+
 	private ImageView front;
 
 	private boolean isFirstImage = true;
@@ -19,6 +24,10 @@ public class Carta {
 	private boolean turned;
 	private boolean enabledToPlay;				
 	private int imageId;
+	public int getImageId() {
+		return imageId;
+	}
+
 	private int positionId;
 	private int positionX;
 
@@ -26,7 +35,6 @@ public class Carta {
 	
 	public Carta(Context ctxt, int codFigura, int imageId, int positionId) {
 		this.ctxt = ctxt;
-		this.frameLayout = new FrameLayout(ctxt);
 		back = new ImageView(ctxt);
 		front = new ImageView(ctxt);
 		back.setImageDrawable(ctxt.getResources().getDrawable(R.drawable.ic_card_back));
@@ -35,16 +43,13 @@ public class Carta {
 		
 		//padding
 		back.setPadding(padding, padding, padding, padding);
+		front.setPadding(padding, padding, padding, padding);
 		
-		frameLayout.addView(back);
-		frameLayout.addView(front);
-
 		back.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				if (isFirstImage) {
 					applyRotation(0, 90);
 					isFirstImage = !isFirstImage;
-
 				} else {
 					applyRotation(0, -90);
 					isFirstImage = !isFirstImage;
@@ -56,7 +61,7 @@ public class Carta {
 		this.positionId = positionId;
 	}
 	
-	private void applyRotation(float start, float end) {
+	public void applyRotation(float start, float end) { //TODO PRIVATE!!!!
 		// Find the center of image
 		final float centerX = back.getWidth() / 2.0f;
 		final float centerY = back.getHeight() / 2.0f;
@@ -86,9 +91,5 @@ public class Carta {
 	    Drawable image = ctxt.getResources().getDrawable(imageResource);
 	    
 	    return image;
-	}
-	
-	public FrameLayout getFrameLayout() {
-		return frameLayout;
 	}
 }

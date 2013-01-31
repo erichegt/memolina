@@ -61,7 +61,8 @@ public class Tabuleiro {
 				linha = new TableRow(ctxt);
 				tableLayout.addView(linha);
 			}
-			linha.addView(carta.getFrameLayout());
+			linha.addView(carta.getFront());
+			linha.addView(carta.getBack());
 		}
 	}
 	

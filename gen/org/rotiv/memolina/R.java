@@ -40,8 +40,9 @@ public final class R {
         public static final int ic_memolina=0x7f02001a;
     }
     public static final class id {
+        public static final int botaoViraTudo=0x7f070002;
         public static final int jogo=0x7f070000;
-        public static final int menu_settings=0x7f070002;
+        public static final int menu_settings=0x7f070003;
         public static final int tempo=0x7f070001;
     }
     public static final class layout {
