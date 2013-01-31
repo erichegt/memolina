@@ -35,7 +35,7 @@ public final class R {
         public static final int ic_card7=0x7f020015;
         public static final int ic_card8=0x7f020016;
         public static final int ic_card9=0x7f020017;
-        public static final int ic_card_back=0x7f020018;
+        public static final int ic_card99=0x7f020018;
         public static final int ic_launcher=0x7f020019;
         public static final int ic_memolina=0x7f02001a;
     }

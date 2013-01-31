@@ -1,4 +1,4 @@
-package org.rotiv.memolina;
+package org.rotiv.memolina.controller;
 
 import android.graphics.Camera;
 import android.graphics.Matrix;

@@ -1,4 +1,4 @@
-package org.rotiv.memolina;
+package org.rotiv.memolina.model;
 
 
 public class Fase{

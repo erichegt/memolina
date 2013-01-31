@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.rotiv.memolina.Carta;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -55,14 +54,15 @@ public class Tabuleiro {
 		Carta carta;
 		TableRow linha = null;
 		for (int a = 0; a < nCards; a++) {
-			carta = new Carta(ctxt, shuffledIds.get(a), shuffledIds.get(a), a);
+			carta = new Carta(ctxt);
+			carta.setImageId(shuffledIds.get(a));
+			carta.setPositionId(a);
 			shuffledCards.add(carta);
 			if (a % cols == 0) {
 				linha = new TableRow(ctxt);
 				tableLayout.addView(linha);
 			}
-			linha.addView(carta.getFront());
-			linha.addView(carta.getBack());
+			linha.addView(carta);
 		}
 	}
 	

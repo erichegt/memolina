@@ -1,6 +1,6 @@
-package org.rotiv.memolina;
+package org.rotiv.memolina.view;
 
-import org.rotiv.memolina.view.Tabuleiro;
+import org.rotiv.memolina.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -39,7 +39,7 @@ public class MemolinaActivity extends Activity {
 			public void onClick(View v) {
 				for(int x=0; x < tabuleiro.getnCards(); x++) {
 					Carta c = (Carta) tabuleiro.getShuffledCards().get(x);
-					c.applyRotation(0, -90);
+					c.rotacionaCarta();
 				}
 			}
 		});
