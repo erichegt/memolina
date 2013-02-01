@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.rotiv.memolina.model.ObservadorDeCartas;
+
 import android.content.Context;
+import android.util.Log;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-public class Tabuleiro {
+public class Tabuleiro implements ObservadorDeCartas{
 	private TableLayout tableLayout;
 	private Context ctxt;
 	
@@ -22,7 +25,7 @@ public class Tabuleiro {
 	private int rows;
 	private int equalCards;
 	
-	public static List<Carta> BUFFER;
+	private List<Carta> buffer;
 	
 	public Tabuleiro(Context ctxt) {
 		this.ctxt = ctxt;
@@ -34,7 +37,7 @@ public class Tabuleiro {
 	}
 	
 	public void constroiTabuleiro() {
-		BUFFER = new ArrayList<Carta>();
+		buffer = new ArrayList<Carta>();
 		
 		this.setnCards(getCols()*getRows());
 		
@@ -55,6 +58,7 @@ public class Tabuleiro {
 		TableRow linha = null;
 		for (int a = 0; a < nCards; a++) {
 			carta = new Carta(ctxt);
+			carta.setObservador(this);
 			carta.setImageId(shuffledIds.get(a));
 			carta.setPositionId(a);
 			shuffledCards.add(carta);
@@ -110,5 +114,35 @@ public class Tabuleiro {
 	
 	public void setnCards(int nCards) {
 		this.nCards = nCards;
+	}
+
+	@Override
+	public void lidaComASelecaoDa(Carta c) {
+		buffer.add(c);
+		//LOGICA DE VERIFICAO PARA DUAS JOGADAS (equalCards == 2)
+		if (buffer.size() > 2) {
+			Carta c1 = buffer.get(0);
+			Carta c2 = buffer.get(1);
+			
+//			Log.i("RESULTADO", buffer.toString());
+			
+			if (c1.equals(c2)) {
+//				Log.i("RESULTADO", "ACERTOU!!!");
+				c1.setEnabled(false);
+				c2.setEnabled(false);
+				c1.setFront(true);
+				c2.setFront(true);
+			} else {
+//				Log.i("RESULTADO:", "ERROU :(");
+				c1.rotacionaCarta();
+				c2.rotacionaCarta();
+				c1.setEnabled(true);
+				c2.setEnabled(true);
+//				c1.setFront(false);
+//				c2.setFront(false);						
+			}
+			buffer.remove(0);
+			buffer.remove(0);
+		}
 	}
 }

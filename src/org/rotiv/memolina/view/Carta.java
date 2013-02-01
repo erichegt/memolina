@@ -2,6 +2,7 @@ package org.rotiv.memolina.view;
 
 import org.rotiv.memolina.R;
 import org.rotiv.memolina.controller.Flip3dAnimation;
+import org.rotiv.memolina.model.ObservadorDeCartas;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,7 @@ public class Carta extends ImageView{
 	private int size;
 	private int positionId;
 	private Context ctxt;
+	private ObservadorDeCartas observador;
 
 	public Carta(Context ctxt) {
 		super(ctxt);
@@ -33,36 +35,16 @@ public class Carta extends ImageView{
 			public void onClick(View view) {
 				view.setEnabled(false);
 				rotacionaCarta();
-				((Carta) view).setFront(true);
-				Tabuleiro.BUFFER.add((Carta) view);
-				//LOGICA DE VERIFICAO PARA DUAS JOGADAS (equalCards == 2)
-				if (Tabuleiro.BUFFER.size() > 2) {
-					Carta c1 = Tabuleiro.BUFFER.get(0);
-					Carta c2 = Tabuleiro.BUFFER.get(1);
-					
-					Log.i("RESULTADO", Tabuleiro.BUFFER.toString());
-					
-					if (c1.imageId == c2.imageId) {
-						Log.i("RESULTADO", "ACERTOU!!!");
-						c1.setEnabled(false);
-						c2.setEnabled(false);
-						c1.setFront(true);
-						c2.setFront(true);
-					} else {
-						Log.i("RESULTADO:", "ERROU :(");
-						c1.rotacionaCarta();
-						c2.rotacionaCarta();
-						c1.setEnabled(true);
-						c2.setEnabled(true);
-//						c1.setFront(false);
-//						c2.setFront(false);						
-					}
-					Tabuleiro.BUFFER.remove(0);
-					Tabuleiro.BUFFER.remove(0);
-				}
+				Carta.this.setFront(true);
+				observador.lidaComASelecaoDa(Carta.this);
 //				front = !front;
 			}
 		});
+	}
+	
+	public void setObservador(ObservadorDeCartas observador) {
+		this.observador = observador;
+		
 	}
 	
 	public void rotacionaCarta() {
@@ -128,5 +110,17 @@ public class Carta extends ImageView{
 	@Override
 	public String toString() {
 		return String.valueOf(this.imageId);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Carta) {
+			if (this.imageId == ((Carta) o).imageId) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 }
