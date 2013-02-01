@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 import android.content.Context;
-import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -18,24 +16,26 @@ public class Tabuleiro {
 	private List<Integer> shuffledIds;
 	private List<Carta> shuffledCards;
 	
-	private int cardSize;
 	private int nCards;
 
 	private int cols;
 	private int rows;
 	private int equalCards;
-
+	
+	public static List<Carta> BUFFER;
+	
 	public Tabuleiro(Context ctxt) {
 		this.ctxt = ctxt;
 		this.tableLayout = new TableLayout(ctxt);
-//		cardSize = ctxt.getResources().getDrawable(R.drawable.ic_card_back).getMinimumWidth();
-		cardSize = 40;
+		
 		ids = new ArrayList<Integer>();
 		shuffledIds = new ArrayList<Integer>();
 		shuffledCards = new ArrayList<Carta>();
 	}
 	
 	public void constroiTabuleiro() {
+		BUFFER = new ArrayList<Carta>();
+		
 		this.setnCards(getCols()*getRows());
 		
 		// Cards:

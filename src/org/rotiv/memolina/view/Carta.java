@@ -4,14 +4,12 @@ import org.rotiv.memolina.R;
 import org.rotiv.memolina.controller.Flip3dAnimation;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 public class Carta extends ImageView{
@@ -33,9 +31,36 @@ public class Carta extends ImageView{
 		
 		this.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
+				view.setEnabled(false);
 				rotacionaCarta();
-				view.setEnabled(front);
-				front = !front;
+				((Carta) view).setFront(true);
+				Tabuleiro.BUFFER.add((Carta) view);
+				//LOGICA DE VERIFICAO PARA DUAS JOGADAS (equalCards == 2)
+				if (Tabuleiro.BUFFER.size() > 2) {
+					Carta c1 = Tabuleiro.BUFFER.get(0);
+					Carta c2 = Tabuleiro.BUFFER.get(1);
+					
+					Log.i("RESULTADO", Tabuleiro.BUFFER.toString());
+					
+					if (c1.imageId == c2.imageId) {
+						Log.i("RESULTADO", "ACERTOU!!!");
+						c1.setEnabled(false);
+						c2.setEnabled(false);
+						c1.setFront(true);
+						c2.setFront(true);
+					} else {
+						Log.i("RESULTADO:", "ERROU :(");
+						c1.rotacionaCarta();
+						c2.rotacionaCarta();
+						c1.setEnabled(true);
+						c2.setEnabled(true);
+//						c1.setFront(false);
+//						c2.setFront(false);						
+					}
+					Tabuleiro.BUFFER.remove(0);
+					Tabuleiro.BUFFER.remove(0);
+				}
+//				front = !front;
 			}
 		});
 	}
@@ -58,13 +83,13 @@ public class Carta extends ImageView{
 		    	} else {
 		    		Carta.this.setImageDrawable(Carta.this.getCardDrawable(99));
 		    	}
-		    	Flip3dAnimation anim = new Flip3dAnimation(90f, 0f, size/2.0f, size/2.0f);
-				anim.setInterpolator(new LinearInterpolator());
+		    	Flip3dAnimation anim2 = new Flip3dAnimation(90f, 0f, size/2.0f, size/2.0f);
+				anim2.setInterpolator(new AccelerateInterpolator());
 //				anim.setRepeatCount(Animation.INFINITE);
-				anim.setDuration(250);
+				anim2.setDuration(250);
 
 				// Start animating the image
-				Carta.this.startAnimation(anim);
+				Carta.this.startAnimation(anim2);
 				front = !front;
 		    }
 		});
@@ -94,5 +119,14 @@ public class Carta extends ImageView{
 
 	public void setPositionId(int positionId) {
 		this.positionId = positionId;
+	}
+	
+	public void setFront(boolean front) {
+		this.front = front;
+	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(this.imageId);
 	}
 }

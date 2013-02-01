@@ -4,10 +4,9 @@ import org.rotiv.memolina.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TableRow.LayoutParams;
@@ -19,7 +18,6 @@ public class MemolinaActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		RelativeLayout jogo = (RelativeLayout) findViewById(R.id.jogo);
 //		LinearLayout tempo = (LinearLayout) findViewById(R.id.tempo);
-		Button viraTudo = (Button) findViewById(R.id.botaoViraTudo);
 
 		final Tabuleiro tabuleiro = new Tabuleiro(this);
 		tabuleiro.getTableLayout().setGravity(Gravity.CENTER);
@@ -34,15 +32,12 @@ public class MemolinaActivity extends Activity {
 				
 		jogo.addView(tabuleiro.getTableLayout());
 		
-		viraTudo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for(int x=0; x < tabuleiro.getnCards(); x++) {
-					Carta c = (Carta) tabuleiro.getShuffledCards().get(x);
-					c.rotacionaCarta();
-				}
-			}
-		});
+		SystemClock.sleep(5000);
+		for (int x = 0; x < tabuleiro.getnCards(); x++) {
+			Carta c = (Carta) tabuleiro.getShuffledCards().get(x);
+			c.rotacionaCarta();
+		}
+
 	}
 
 	@Override
@@ -51,7 +46,4 @@ public class MemolinaActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
-	
-
 }

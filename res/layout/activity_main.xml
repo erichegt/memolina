@@ -13,13 +13,6 @@
         android:layout_centerHorizontal="true">
 <!--         android:layout_marginTop="30dp" -->
 <!--         android:orientation="vertical"  -->
-
-        <Button
-            android:id="@+id/botaoViraTudo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Vira Tudo" />
-
     </LinearLayout>
 
 </RelativeLayout>
